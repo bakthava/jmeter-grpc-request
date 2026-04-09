@@ -14,6 +14,9 @@ import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import vn.zalopay.benchmark.core.config.GrpcRequestConfig;
+
+import java.io.File;
 import java.util.Map;
 
 import javax.net.ssl.SSLException;
@@ -35,8 +38,23 @@ public class ChannelFactory {
             Map<String, String> metadataHash,
             int maxInboundMessageSize,
             int maxInboundMetadataSize) {
+        return createChannel(endpoint, tls, disableTlsVerification, metadataHash,
+                maxInboundMessageSize, maxInboundMetadataSize, null, null, null);
+    }
+
+    public ManagedChannel createChannel(
+            HostAndPort endpoint,
+            boolean tls,
+            boolean disableTlsVerification,
+            Map<String, String> metadataHash,
+            int maxInboundMessageSize,
+            int maxInboundMetadataSize,
+            String clientCertFile,
+            String clientKeyFile,
+            String caCertFile) {
         NettyChannelBuilder managedChannelBuilder =
-                createChannelBuilder(endpoint, tls, disableTlsVerification, metadataHash);
+                createChannelBuilder(endpoint, tls, disableTlsVerification, metadataHash,
+                        clientCertFile, clientKeyFile, caCertFile);
         managedChannelBuilder.maxInboundMessageSize(maxInboundMessageSize);
         managedChannelBuilder.maxInboundMetadataSize(maxInboundMetadataSize);
         return managedChannelBuilder.build();
@@ -46,30 +64,44 @@ public class ChannelFactory {
             HostAndPort endpoint,
             boolean tls,
             boolean disableTlsVerification,
-            Map<String, String> metadataHash) {
+            Map<String, String> metadataHash,
+            String clientCertFile,
+            String clientKeyFile,
+            String caCertFile) {
         if (!tls) {
             return NettyChannelBuilder.forAddress(endpoint.getHost(), endpoint.getPort())
                     .negotiationType(NegotiationType.PLAINTEXT)
                     .intercept(metadataInterceptor(metadataHash));
         }
-        return createSSLMessageChannel(endpoint, disableTlsVerification, metadataHash);
+        return createSSLMessageChannel(endpoint, disableTlsVerification, metadataHash,
+                clientCertFile, clientKeyFile, caCertFile);
     }
 
     private NettyChannelBuilder createSSLMessageChannel(
             HostAndPort endpoint,
             boolean disableTlsVerification,
-            Map<String, String> metadataHash) {
+            Map<String, String> metadataHash,
+            String clientCertFile,
+            String clientKeyFile,
+            String caCertFile) {
         return NettyChannelBuilder.forAddress(endpoint.getHost(), endpoint.getPort())
                 .negotiationType(NegotiationType.TLS)
-                .sslContext(createSslContext(disableTlsVerification))
+                .sslContext(createSslContext(disableTlsVerification, clientCertFile, clientKeyFile, caCertFile))
                 .intercept(metadataInterceptor(metadataHash));
     }
 
-    private SslContext createSslContext(boolean disableTlsVerification) {
+    private SslContext createSslContext(boolean disableTlsVerification,
+            String clientCertFile, String clientKeyFile, String caCertFile) {
         try {
             io.netty.handler.ssl.SslContextBuilder grpcSslContexts = GrpcSslContexts.forClient();
             if (disableTlsVerification) {
                 grpcSslContexts.trustManager(InsecureTrustManagerFactory.INSTANCE);
+            } else if (caCertFile != null && !caCertFile.isEmpty()) {
+                grpcSslContexts.trustManager(new File(caCertFile));
+            }
+            if (clientCertFile != null && !clientCertFile.isEmpty()
+                    && clientKeyFile != null && !clientKeyFile.isEmpty()) {
+                grpcSslContexts.keyManager(new File(clientCertFile), new File(clientKeyFile));
             }
             return createSSlContext(grpcSslContexts);
         } catch (SSLException e) {

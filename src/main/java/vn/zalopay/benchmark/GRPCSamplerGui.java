@@ -67,6 +67,13 @@ public class GRPCSamplerGui extends AbstractSamplerGui {
     private JCheckBox isTLSCheckBox;
     private JCheckBox isTLSDisableVerificationCheckBox;
 
+    private JTextField clientCertFileField;
+    private JButton clientCertBrowseButton;
+    private JTextField clientKeyFileField;
+    private JButton clientKeyBrowseButton;
+    private JTextField caCertFileField;
+    private JButton caCertBrowseButton;
+
     private JSyntaxTextArea requestJsonArea;
 
     public GRPCSamplerGui() {
@@ -108,6 +115,9 @@ public class GRPCSamplerGui extends AbstractSamplerGui {
         grpcSampler.setDeadline(this.deadlineField.getText());
         grpcSampler.setTls(this.isTLSCheckBox.isSelected());
         grpcSampler.setTlsDisableVerification(this.isTLSDisableVerificationCheckBox.isSelected());
+        grpcSampler.setClientCertFile(this.clientCertFileField.getText());
+        grpcSampler.setClientKeyFile(this.clientKeyFileField.getText());
+        grpcSampler.setCaCertFile(this.caCertFileField.getText());
         grpcSampler.setChannelShutdownAwaitTime(this.channelFactoryShutdownTimeField.getText());
         grpcSampler.setChannelMaxInboundMessageSize(this.maxInboundMessageSize.getText());
         grpcSampler.setChannelMaxInboundMetadataSize(this.maxInboundMetadataSize.getText());
@@ -130,6 +140,9 @@ public class GRPCSamplerGui extends AbstractSamplerGui {
         deadlineField.setText(grpcSampler.getDeadline());
         isTLSCheckBox.setSelected(grpcSampler.isTls());
         isTLSDisableVerificationCheckBox.setSelected(grpcSampler.isTlsDisableVerification());
+        clientCertFileField.setText(grpcSampler.getClientCertFile());
+        clientKeyFileField.setText(grpcSampler.getClientKeyFile());
+        caCertFileField.setText(grpcSampler.getCaCertFile());
         channelFactoryShutdownTimeField.setText(
                 Integer.toString(grpcSampler.getChannelShutdownAwaitTime()));
         maxInboundMessageSize.setText(
@@ -155,6 +168,9 @@ public class GRPCSamplerGui extends AbstractSamplerGui {
         deadlineField.setText("1000");
         isTLSCheckBox.setSelected(false);
         isTLSDisableVerificationCheckBox.setSelected(false);
+        clientCertFileField.setText("");
+        clientKeyFileField.setText("");
+        caCertFileField.setText("");
         channelFactoryShutdownTimeField.setText("1000");
         maxInboundMessageSize.setText("4194304");
         maxInboundMetadataSize.setText("8192");
@@ -203,8 +219,54 @@ public class GRPCSamplerGui extends AbstractSamplerGui {
         JPanel webserverOtherPanel = new HorizontalPanel();
         webserverOtherPanel.add(isTLSCheckBox);
         webserverOtherPanel.add(isTLSDisableVerificationCheckBox);
+
+        // mTLS panel
+        JPanel mTLSPanel = new JPanel(new GridBagLayout());
+        mTLSPanel.setBorder(BorderFactory.createTitledBorder("Mutual TLS (mTLS) - Optional"));
+        GridBagConstraints lc = new GridBagConstraints();
+        lc.anchor = GridBagConstraints.LINE_END;
+        lc.insets = new java.awt.Insets(2, 4, 2, 4);
+        GridBagConstraints fc = new GridBagConstraints();
+        fc.anchor = GridBagConstraints.LINE_START;
+        fc.weightx = 1.0;
+        fc.fill = GridBagConstraints.HORIZONTAL;
+        fc.insets = new java.awt.Insets(2, 0, 2, 4);
+        GridBagConstraints bc = new GridBagConstraints();
+        bc.anchor = GridBagConstraints.LINE_START;
+        bc.insets = new java.awt.Insets(2, 0, 2, 4);
+
+        lc.gridx = 0; lc.gridy = 0;
+        mTLSPanel.add(new JLabel("Client Certificate File:", JLabel.RIGHT), lc);
+        fc.gridx = 1; fc.gridy = 0;
+        clientCertFileField = new JTextField(20);
+        mTLSPanel.add(clientCertFileField, fc);
+        bc.gridx = 2; bc.gridy = 0;
+        clientCertBrowseButton = new JButton("Browse...");
+        mTLSPanel.add(clientCertBrowseButton, bc);
+        GuiBuilderHelper.strechItemToComponent(clientCertFileField, clientCertBrowseButton);
+        clientCertBrowseButton.addActionListener(new BrowseAction(clientCertFileField, false));
+
+        lc.gridy = 1; fc.gridy = 1; bc.gridy = 1;
+        mTLSPanel.add(new JLabel("Client Key File:", JLabel.RIGHT), lc);
+        clientKeyFileField = new JTextField(20);
+        mTLSPanel.add(clientKeyFileField, fc);
+        clientKeyBrowseButton = new JButton("Browse...");
+        mTLSPanel.add(clientKeyBrowseButton, bc);
+        GuiBuilderHelper.strechItemToComponent(clientKeyFileField, clientKeyBrowseButton);
+        clientKeyBrowseButton.addActionListener(new BrowseAction(clientKeyFileField, false));
+
+        lc.gridy = 2; fc.gridy = 2; bc.gridy = 2;
+        mTLSPanel.add(new JLabel("CA Certificate File (Optional):", JLabel.RIGHT), lc);
+        caCertFileField = new JTextField(20);
+        mTLSPanel.add(caCertFileField, fc);
+        caCertBrowseButton = new JButton("Browse...");
+        mTLSPanel.add(caCertBrowseButton, bc);
+        GuiBuilderHelper.strechItemToComponent(caCertFileField, caCertBrowseButton);
+        caCertBrowseButton.addActionListener(new BrowseAction(caCertFileField, false));
+
         webServerPanel.add(webserverHostPanel);
         webServerPanel.add(webserverOtherPanel);
+        webServerPanel.add(mTLSPanel);
         return webServerPanel;
     }
 

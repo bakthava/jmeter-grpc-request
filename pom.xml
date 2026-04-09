@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>vn.zalopay.benchmark</groupId>
     <artifactId>jmeter-grpc-request</artifactId>
-    <version>1.1.3</version>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -16,7 +16,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <lombok.version>1.18.24</lombok.version>
         <commons.lang3.version>3.12.0</commons.lang3.version>
-        <org.apache.commons.io.version>2.11.0</org.apache.commons.io.version>
+        <org.apache.commons.io.version>2.14.0</org.apache.commons.io.version>
         <jmeter.version>5.5</jmeter.version>
         <netty.ssl.version>2.0.54.Final</netty.ssl.version>
         <minhhoang.protoc.version>3.21.4</minhhoang.protoc.version>
@@ -24,8 +24,8 @@
         <protobuf.version>3.17.1</protobuf.version>
         <jmeter.cmn.version>0.7</jmeter.cmn.version>
         <emulators.jmeter.version>0.4</emulators.jmeter.version>
-        <mockito.version>5.1.1</mockito.version>
-        <testng.version>7.6.1</testng.version>
+        <mockito.version>4.11.0</mockito.version>
+        <testng.version>7.5.1</testng.version>
         <fastjson.version>2.0.28</fastjson.version>
         <com.google.code.gson.version>2.9.0</com.google.code.gson.version>
     </properties>
@@ -150,7 +150,7 @@
 
     <build>
         <defaultGoal>clean generate-sources compile install</defaultGoal>
-        <finalName>${project.artifactId}</finalName>
+        <finalName>${project.artifactId}.${project.version}</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>

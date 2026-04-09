@@ -35,6 +35,9 @@ public class GRPCSampler extends AbstractSampler implements ThreadListener, Test
     public static final String DEADLINE = "GRPCSampler.deadline";
     public static final String TLS = "GRPCSampler.tls";
     public static final String TLS_DISABLE_VERIFICATION = "GRPCSampler.tlsDisableVerification";
+    public static final String CLIENT_CERT_FILE = "GRPCSampler.clientCertFile";
+    public static final String CLIENT_KEY_FILE = "GRPCSampler.clientKeyFile";
+    public static final String CA_CERT_FILE = "GRPCSampler.caCertFile";
     public static final String CHANNEL_SHUTDOWN_AWAIT_TIME = "GRPCSampler.channelAwaitTermination";
     public static final String CHANNEL_MAX_INBOUND_MESSAGE_SIZE =
             "GRPCSampler" + ".maxInboundMessageSize";
@@ -70,6 +73,9 @@ public class GRPCSampler extends AbstractSampler implements ThreadListener, Test
                             .fullMethod(getFullMethod())
                             .tls(isTls())
                             .tlsDisableVerification(isTlsDisableVerification())
+                            .clientCertFile(getClientCertFile())
+                            .clientKeyFile(getClientKeyFile())
+                            .caCertFile(getCaCertFile())
                             .awaitTerminationTimeout(getChannelShutdownAwaitTime())
                             .maxInboundMessageSize(getChannelMaxInboundMessageSize())
                             .maxInboundMetadataSize(getChannelMaxInboundMetadataSize())
@@ -270,6 +276,30 @@ public class GRPCSampler extends AbstractSampler implements ThreadListener, Test
 
     public void setTlsDisableVerification(boolean tlsDisableVerification) {
         setProperty(TLS_DISABLE_VERIFICATION, tlsDisableVerification);
+    }
+
+    public String getClientCertFile() {
+        return getPropertyAsString(CLIENT_CERT_FILE);
+    }
+
+    public void setClientCertFile(String clientCertFile) {
+        setProperty(CLIENT_CERT_FILE, clientCertFile);
+    }
+
+    public String getClientKeyFile() {
+        return getPropertyAsString(CLIENT_KEY_FILE);
+    }
+
+    public void setClientKeyFile(String clientKeyFile) {
+        setProperty(CLIENT_KEY_FILE, clientKeyFile);
+    }
+
+    public String getCaCertFile() {
+        return getPropertyAsString(CA_CERT_FILE);
+    }
+
+    public void setCaCertFile(String caCertFile) {
+        setProperty(CA_CERT_FILE, caCertFile);
     }
 
     public String getHost() {

@@ -157,7 +157,10 @@ public class ClientCaller {
                         disableTtlVerification,
                         metadataMap,
                         requestConfig.getMaxInboundMessageSize(),
-                        requestConfig.getMaxInboundMetadataSize());
+                        requestConfig.getMaxInboundMetadataSize(),
+                        requestConfig.getClientCertFile(),
+                        requestConfig.getClientKeyFile(),
+                        requestConfig.getCaCertFile());
         dynamicClient = DynamicGrpcClient.create(methodDescriptor, channel);
     }
 

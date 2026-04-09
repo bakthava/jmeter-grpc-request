@@ -17,6 +17,9 @@ public class GrpcRequestConfig {
     private boolean tls;
     private boolean tlsDisableVerification;
     private int awaitTerminationTimeout = 5000;
+    private String clientCertFile;
+    private String clientKeyFile;
+    private String caCertFile;
 
     public GrpcRequestConfig() {}
 
@@ -73,6 +76,18 @@ public class GrpcRequestConfig {
         return maxInboundMetadataSize;
     }
 
+    public String getClientCertFile() {
+        return clientCertFile;
+    }
+
+    public String getClientKeyFile() {
+        return clientKeyFile;
+    }
+
+    public String getCaCertFile() {
+        return caCertFile;
+    }
+
     @Override
     public String toString() {
         return "GrpcRequestConfig{"
@@ -98,6 +113,15 @@ public class GrpcRequestConfig {
                 + tlsDisableVerification
                 + ", awaitTerminationTimeout="
                 + awaitTerminationTimeout
+                + ", clientCertFile='"
+                + clientCertFile
+                + '\''
+                + ", clientKeyFile='"
+                + clientKeyFile
+                + '\''
+                + ", caCertFile='"
+                + caCertFile
+                + '\''
                 + '}';
     }
 }
