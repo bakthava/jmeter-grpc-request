@@ -31,7 +31,7 @@
           <stringProp name="hostPort">localhost:8005</stringProp>
           <stringProp name="libFolder">/Users/lap13227/Desktop/request-proto/googleapis-master</stringProp>
           <stringProp name="metadata"></stringProp>
-          <stringProp name="protoFolder">/Users/lap13227/workspace/work/zalopay-oss/jmeter-grpc-request/dist/benchmark/grpc-server/src/main/resources/protos-v2</stringProp>
+          <stringProp name="protoFolder">/Users/lap13227/workspace/work/bakthava/jmeter-grpc-request/dist/benchmark/grpc-server/src/main/resources/protos-v2</stringProp>
           <stringProp name="requestFile"></stringProp>
           <boolProp name="tls">false</boolProp>
           <stringProp name="requestJson">{}</stringProp>
@@ -53,7 +53,7 @@
           <stringProp name="hostPort">localhost:8005</stringProp>
           <stringProp name="libFolder">/Users/lap13227/Desktop/request-proto/googleapis-master</stringProp>
           <stringProp name="metadata"></stringProp>
-          <stringProp name="protoFolder">/Users/lap13227/workspace/work/zalopay-oss/jmeter-grpc-request/dist/benchmark/grpc-server/src/main/resources/protos-v2</stringProp>
+          <stringProp name="protoFolder">/Users/lap13227/workspace/work/bakthava/jmeter-grpc-request/dist/benchmark/grpc-server/src/main/resources/protos-v2</stringProp>
           <stringProp name="requestFile"></stringProp>
           <boolProp name="tls">false</boolProp>
           <stringProp name="requestJson">{

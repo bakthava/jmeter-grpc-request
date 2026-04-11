@@ -25,7 +25,7 @@ one.
 ## Pull requests ##
 
 If you choose to [submit a pull
-request](https://github.com/zalopay-oss/jmeter-grpc-request/pulls), you will
+request](https://github.com/bakthava/jmeter-grpc-request/pulls), you will
 notice that our continuous integration (CI) system runs a fairly
 extensive set of linters and syntax checkers.  Your pull request may
 fail these checks, and that's OK.  If you want you can stop there and

@@ -40,7 +40,7 @@ public class GRPCSamplerGui extends AbstractSamplerGui {
     private static final Logger log = LoggerFactory.getLogger(GRPCSamplerGui.class);
     private static final long serialVersionUID = 240L;
 
-    private static final String WIKI_PAGE = "https://github.com/zalopay-oss/jmeter-grpc-request";
+    private static final String WIKI_PAGE = "https://github.com/bakthava/jmeter-grpc-request";
     private static final String GOOGLE_PROTOBUF_PACKAGE_PREFIX = "google.protobuf";
     private static final String GOOGLE_PROTOBUF_DEFAULT_KEY = "value";
 

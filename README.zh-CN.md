@@ -41,7 +41,7 @@
 ### 插件安装
 你需要将 **jmeter-grpc-request** 插件的 `jar` 包复制到JMeter的 `lib/ext` 目录下面，然后重启你的JMeter工具。
 
-**jmeter-grpc-request** 插件的 `jar` 包，可以从 [Releases Page](https://github.com/zalopay-oss/jmeter-grpc-request/releases) 获得，也可以 在 [JMeter Plugins Manager](https://jmeter-plugins.org/?search=jmeter-grpc-request) 中找到
+**jmeter-grpc-request** 插件的 `jar` 包，可以从 [Releases Page](https://github.com/bakthava/jmeter-grpc-request/releases) 获得，也可以 在 [JMeter Plugins Manager](https://jmeter-plugins.org/?search=jmeter-grpc-request) 中找到
 
 ### 使用 JMeter 发出 gRPC 请求
 创建测试脚本：

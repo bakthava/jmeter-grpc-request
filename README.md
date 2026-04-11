@@ -47,7 +47,7 @@ Same as JMeter HTTP Request but for gRPC. Copy only once file jar to lib/ext of 
 
 ### Requirements
 
-All you need copy *jmeter-grpc-request* file jar to directory `lib/ext` of JMeter and restart JMeter GUI (copy once, use forever). Binary are available from the [Releases Page](https://github.com/zalopay-oss/jmeter-grpc-request/releases).
+All you need copy *jmeter-grpc-request* file jar to directory `lib/ext` of JMeter and restart JMeter GUI (copy once, use forever). Binary are available from the [Releases Page](https://github.com/bakthava/jmeter-grpc-request/releases).
 
 ### Making a gRPC request with JMeter
 
