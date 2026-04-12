@@ -16,7 +16,7 @@ public class GrpcRequestConfigTest {
                 grpcRequestConfigString,
                 "GrpcRequestConfig{maxInboundMessageSize=4194304, maxInboundMetadataSize=8192,"
                     + " hostPort='a', testProtoFile='b', libFolder='c', fullMethod='d', tls=true,"
-                    + " tlsDisableVerification=true, awaitTerminationTimeout=1000}");
+                    + " tlsDisableVerification=true, awaitTerminationTimeout=1000, clientCertFile='null', clientKeyFile='null', caCertFile='null'}");
     }
 
     @Test
@@ -107,12 +107,12 @@ public class GrpcRequestConfigTest {
                 "GrpcRequestConfig.GrpcRequestConfigBuilder(maxInboundMessageSize=0,"
                     + " maxInboundMetadataSize=0, hostPort=null, protoFolder=null, libFolder=null,"
                     + " fullMethod=null, tls=false, tlsDisableVerification=false,"
-                    + " awaitTerminationTimeout=0)");
+                    + " awaitTerminationTimeout=0, clientCertFile=null, clientKeyFile=null, caCertFile=null)");
         Assert.assertEquals(
                 grpcRequestConfigString,
                 "GrpcRequestConfig{maxInboundMessageSize=1000, maxInboundMetadataSize=1000,"
                     + " hostPort='a', testProtoFile='b', libFolder='c', fullMethod='d', tls=true,"
-                    + " tlsDisableVerification=true, awaitTerminationTimeout=1000}");
+                    + " tlsDisableVerification=true, awaitTerminationTimeout=1000, clientCertFile='null', clientKeyFile='null', caCertFile='null'}");
     }
 
     @Test
@@ -124,7 +124,7 @@ public class GrpcRequestConfigTest {
                 grpcRequestConfigString,
                 "GrpcRequestConfig{maxInboundMessageSize=4194304, maxInboundMetadataSize=8192,"
                     + " hostPort='null', testProtoFile='null', libFolder='null', fullMethod='null',"
-                    + " tls=false, tlsDisableVerification=false, awaitTerminationTimeout=5000}");
+                    + " tls=false, tlsDisableVerification=false, awaitTerminationTimeout=5000, clientCertFile='null', clientKeyFile='null', caCertFile='null'}");
     }
 
     @Test
@@ -152,7 +152,7 @@ public class GrpcRequestConfigTest {
                 grpcRequestConfigString,
                 "GrpcRequestConfig{maxInboundMessageSize=1000, maxInboundMetadataSize=1000,"
                     + " hostPort='a', testProtoFile='b', libFolder='c', fullMethod='d', tls=true,"
-                    + " tlsDisableVerification=true, awaitTerminationTimeout=1000}");
+                    + " tlsDisableVerification=true, awaitTerminationTimeout=1000, clientCertFile='null', clientKeyFile='null', caCertFile='null'}");
         Assert.assertTrue(grpcRequestConfig.hashCode() != 0);
         Assert.assertTrue(
                 GrpcRequestConfig.builder()
@@ -261,7 +261,7 @@ public class GrpcRequestConfigTest {
                 "GrpcRequestConfig.GrpcRequestConfigBuilder(maxInboundMessageSize=1000,"
                         + " maxInboundMetadataSize=1000, hostPort=a, protoFolder=b, libFolder=c,"
                         + " fullMethod=d, tls=true, tlsDisableVerification=true,"
-                        + " awaitTerminationTimeout=1000)");
+                        + " awaitTerminationTimeout=1000, clientCertFile=null, clientKeyFile=null, caCertFile=null)");
     }
 
     @Test
